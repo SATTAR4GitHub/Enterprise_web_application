@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Cart Detail";
+    var salesTaxRate = 0.13m;
+}
+@{
+    var cartTotal = Convert.ToDecimal(ViewData["CartTotal"]);
+    var cartItemsCount = Convert.ToInt32(ViewData["CartItemsCount"]);
+    var cartDetails = ViewData["CartDetails"] as IEnumerable<CartDetail>;
+    var deleteFromCartViewModel = new DeleteFromCartViewModel();
+
+    var salesTax = Math.Round(cartTotal * salesTaxRate, 2);
+    var shipping = 0.00m;
+    var estimatedTotal = cartTotal + salesTax + shipping;
+}
+
+<h3>Your Cart Details</h3>
+
+<div class="container cart_detail">
+    <div class="row ">
+        <div class="col-md-9 ">
+            <div class="mb-3">
+                <a href="/Product/Index" class="">Continue Shopping</a>
+            </div>
+            <div>
+                <table class="table table-bordered table-striped">
+                    <thead class="">
+                        <tr>
+                            <th class="text-center">Item</th>
+                            <th class="text-center ">Item Name</th>
+                            <th class="text-center ">Price</th>
+                            <th class="text-center ">Quantity</th>
+                            <th class="text-center ">Item Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in cartDetails)
+                        {
+                            <tr class="">
+                                <td class="text-lg-left">
+                                    <img src="/images/product-images/@item.Product.ImageUrl" style="height:80px; width:70px;" />
+                                </td>
+                                <td>@item.Product.ProductName</td>
+                                <td class="text-center ">$@item.Product.Price</td>
+                                <td class="text-center ">@item.Quantity</td>
+                                <td class="text-center ">$@(item.Quantity * item.Product.Price)</td>
+                                <td class="text-center">
+                                    <form asp-controller="Cart" asp-action="RemoveCartItem" method="post">
+                                        <input type="hidden" asp-for="@deleteFromCartViewModel.CartItemId" name="CartItemId" value="@item.Id" />
+                                        <button type="submit" class="text-danger btn btn-dark">X</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-3 border border-dark">
+            <div class="">
+                <h4 class="">Cart Summary</h4>
+                <p>Total Items: @cartItemsCount</p>
+            </div>
+            <table class="table table-sm table-borderless">
+                <tr>
+                    <td>Sub-Total:</td>
+                    <td class="text-right">$@cartTotal</td>
+                </tr>
+                <tr>
+                    <td>Shipping:</td>
+                    <td class="text-right">$@shipping</td>
+                </tr>
+                <tr>
+                    <td>GST/HST:</td>
+                    <td class="text-right">$@salesTax</td>
+                </tr>
+
+                <tr class="border-top">
+                    <td>Estimated Total:</td>
+                    <td class="text-right">$@estimatedTotal</td>
+                </tr>
+            </table>
+            <div class="mt-4 text-center">
+                <a asp-controller="Checkout" asp-action="Checkout" class="btn btn-info">Proceed to Checkout</a>
+            </div>
+            <div class="mt-4">
+                <p>Accepted methods for payment:</p>
+                <p>
+                    <img src="/images/payment-method/visa.jpg" class="mr-3" style="height:50px; width:60px;" />
+                    <img src="/images/payment-method/master.jpg" class="mr-3" style="height:50px; width:60px;" />
+                    <img src="/images/payment-method/paypal.jpg" style="height:50px; width:60px;" />
+                </p>
+            </div>
+
+            <div class="text-center mt-5">
+                <p>NEED HELP?</p>
+                <a class="" asp-area="" asp-controller="ChatSystem" asp-action="Index">
+                    <i class="fa fa-comments fa-3x " aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

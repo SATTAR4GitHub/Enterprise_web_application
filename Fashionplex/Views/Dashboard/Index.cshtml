@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="border-bottom">@ViewData["Title"]</h2>
+
+<div class="container row">
+    <div class="col-xs-3 bg-info vh-100 p-0">
+        <nav class="navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-link mt-4 mb-2" asp-area="" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-chart-bar"></i> Sales Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-link mb-2" asp-area="" asp-controller="Home" asp-action="AddImage"><i class="far fa-images"></i> Banner & Logo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-link mb-2" asp-area="" asp-controller="Home" asp-action="Promotion"><i class="fas fa-bullhorn"></i> Promotion & Offer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-link mb-2" asp-area="" asp-controller="Courses" asp-action="Index"><i class="far fa-address-book"></i> User Account Control</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-xs-9">
+        <p>
+            Hello friend        
+        </p>
+    </div>
+    
+</div>

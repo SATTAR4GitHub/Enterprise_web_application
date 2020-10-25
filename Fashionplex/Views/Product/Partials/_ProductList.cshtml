@@ -1,0 +1,36 @@
+﻿@model ProductViewModel
+
+<div class="container">
+ 
+  <hr class="product-list__upper-horizontal-line" style="margin-bottom: 25px;" />
+  <div class="row">
+    
+    @if (Model.PagedProducts.Products.Any())
+    {
+        @foreach (var product in Model.PagedProducts.Products)
+         {
+           <div class="col-md-4">
+             <partial name="_ProductListItem.cshtml" model="@product"/>
+           </div>
+         }
+    }
+    else
+    {
+      <div class="product-list__empty-notifier">
+        <p>
+          There are no products that match your filters.
+        </p>
+        <p>
+          Try a different combination or contact customer service for further assistance.
+        </p>
+      </div>
+    }
+
+  </div>
+  <hr class="" style="margin-bottom: 4px;" />
+  <div class="row justify-content-center">
+    <div class="">
+      <partial name="_Pagination.cshtml" model="@Model.PagedProducts"/>
+    </div>
+  </div>
+</div>

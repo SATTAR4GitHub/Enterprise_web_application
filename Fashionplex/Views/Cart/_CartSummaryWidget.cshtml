@@ -1,0 +1,16 @@
+﻿@{
+    var cartTotal = Convert.ToDecimal(ViewData["CartTotal"]);
+    var cartItemsCount = Convert.ToInt32(ViewData["CartItemsCount"]);
+    var cartDetails = ViewData["CartDetails"] as IEnumerable<CartDetail>;
+}
+
+<ul class="navbar-nav ml-4">
+    <li class="nav-item">
+        <a asp-controller="Cart" asp-action="CartDetail"><i class="fas fa-cart-plus"></i> Cart</a>
+        @if (cartDetails != null && cartDetails.Any())
+        {
+            <span class="text-black-50">@cartItemsCount item(s)</span>
+            <span class="text-black-50">$@cartTotal</span>
+        }
+    </li>
+</ul>

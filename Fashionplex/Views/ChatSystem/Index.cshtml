@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model IEnumerable<Fashionplex.Models.Message>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser>  UserManager
+
+@{
+    ViewData["Title"] = "Chat";
+    var userName = User.Identity.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 class="mb-5">Fashionplex - Virtual Help</h2>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.GetUserAsync(User);
+
+    <div class="jumbotron bg-light">
+        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+        {
+            <h4 class="text-center text-primary mb-4">
+                <i class="fab fa-facebook-messenger"></i>&nbsp; @user.FirstName @user.LastName
+                <input id="btnConnect" type="button" value="Connect" />
+            </h4>
+        }
+        else
+        {
+            <h5 class="text-center text-primary">
+                <i class="fab fa-facebook-messenger"></i>&nbsp; Welcome to the Fashionplex!
+            </h5>
+            <p id="selector" class="text-center text-primary mb-4">An agent will connct you shortly.</p>
+        }
+        <div class="row">
+            <div class="col-md-12" id="chat">
+                @if (Model != null)
+                {
+                    foreach (var message in Model.OrderBy(m => m.When))
+                    {
+                        string containerClass, timePosition, textAlign, contcolor, offset;
+                        if (userName == message.UserName)
+                        {
+                            containerClass = "container darker";
+                            timePosition = "time-right text-light";
+                            textAlign = "text-right text-white";
+                            contcolor = "bg-primary";
+                            offset = "col-md-6 offset-md-6";
+                        }
+                        else
+                        {
+                            containerClass = "container";
+                            timePosition = "time-left";
+                            textAlign = "text-left";
+                            contcolor = "bg-info";
+                            offset = "col-md-6";
+                        }
+
+                        <div class="row">
+                            <div class="@offset">
+                                <div class="@containerClass @contcolor m-1">
+                                    <p class="sender @textAlign">
+                                        <i class="fa fa-user" aria-hidden="true"></i> @message.UserFullName
+                                        <span class="@timePosition small ml-3">@message.When.ToString()</span>
+                                    </p>
+                                    <p class="@textAlign pb-2">@message.Text</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-12">
+                <form asp-action="Create"
+                      data-ajax-begin="clearInputField" data-ajax-complete=""
+                      data-ajax-failure="alert('Empty message can't be sent!')" data-ajax-success="sendMessage"
+                      data-ajax="true" data-ajax-method="POST">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input name="Text" class="form-control" id="messageText" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                    </div>
+                    <input type="hidden" value="@userName" name="username" />
+                </form>
+            </div>
+        </div>
+
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+        const userName = "@ViewBag.CurrentUserName";
+        </script>
+    }
+}
+
+@section scripts {
+    <script src="~/signalr/signalr.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/js/signalrReqHandler.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#btnConnect').click(function () {
+                $(this).val('Connected');
+                //var name = 'Manager is connected!';
+                //document.getElementById('selector').innerHTML = name;
+                //$("#selector").html(name);
+                //$("p.selector").text($(this).text() == 'Connected' ? 'name' : 'Order by Alphabet');
+            })
+        });
+    </script>
+
+}
+
+
+
+
+

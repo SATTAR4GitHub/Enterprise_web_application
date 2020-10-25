@@ -1,0 +1,55 @@
+﻿@model Fashionplex.ViewModels.ProductViewModel;
+@{
+    Layout = null;
+}
+
+<div class="modal fade" id="advancedSearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Search Product</h4>
+            </div>
+            @using (Html.BeginForm("Get", "Asset", FormMethod.Get, new { id = "frmAdvancedSearch", @class = "form-horizontal", role = "form" }))
+            {
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <hr />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                <div class="dropdown">
+                                    @*@Html.DropDownListFor(model => model.Category, new SelectList(Model.Categories, "Value", "Text"), new { @class = "form-control" })*@
+                                    @*new SelectList(Model.Countries, "Value", "Text")*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                <div class="dropdown">
+                                    @*@Html.DropDownListFor(model => model.Brand, Model.BrandList, "Any", new { @class = "form-control" })*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                <div class="dropdown">
+                                    @*@Html.DropDownListFor(model => model.Price, Model.Price, "Any", new { @class = "form-control" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnPerformAdvancedSearch" type="button" class="btn btn-default btn-success" data-dismiss="modal">Search</button>
+                    <button id="btnCancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
