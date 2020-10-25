@@ -17,7 +17,6 @@ using Fashionplex.Models;
 using Fashionplex.Repository;
 using Fashionplex.IRepository;
 using Fashionplex.Services;
-using System.Web.Mvc;
 using Fashionplex.Hubs;
 
 namespace Fashionplex
