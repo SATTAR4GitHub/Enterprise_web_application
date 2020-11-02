@@ -18,6 +18,11 @@
                 <span asp-validation-for="ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <select asp-for="Size" class="form-control" asp-items="ViewBag.ProductSize"></select>
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
@@ -79,15 +84,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label">Category</label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="BrandId" class="control-label">Brand</label>
-                <select asp-for="BrandId" class ="form-control" asp-items="ViewBag.BrandId"></select>
+                <select asp-for="BrandId" class="form-control" asp-items="ViewBag.BrandId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ProductStatus" class="control-label"></label>
-                <select asp-for="ProductStatus" class="form-control"  asp-items="ViewBag.ProductStatus"></select>
+                <select asp-for="ProductStatus" class="form-control" asp-items="ViewBag.ProductStatus"></select>
                 <span asp-validation-for="ProductStatus" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -11,10 +11,10 @@ namespace Fashionplex.Models.Shared
         public long Id { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Date Created")]
-        public DateTime? CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Date Modified")]
-        public DateTime? ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

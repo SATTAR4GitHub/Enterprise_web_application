@@ -122,7 +122,8 @@ namespace Fashionplex.Controllers
             ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "BrandName");
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
 
-            // Method for product status enum drop down 
+            // Method for product size and status enum drop down 
+            ProductSizeDropDown();
             ProductStatusDropDown();
 
             return View();
@@ -135,7 +136,7 @@ namespace Fashionplex.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductName,Description,Slug,MetaDescription,MetaKeywords,SKU,Price,SalePrice,OldPrice,ImageUrl,QuantityInStock,IsBestseller,IsFeatured,CategoryId,BrandId,ProductStatus,Id,CreateDate,ModifiedDate,IsDeleted")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductName,Size,Description,Slug,MetaDescription,MetaKeywords,SKU,Price,SalePrice,OldPrice,ImageUrl,QuantityInStock,IsBestseller,IsFeatured,CategoryId,BrandId,ProductStatus,Id,CreateDate,ModifiedDate,IsDeleted")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -169,7 +170,8 @@ namespace Fashionplex.Controllers
             ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "BrandName", product.BrandId);
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName", product.CategoryId);
 
-            // Method for product status enum drop down 
+            // Method for product size and product status enum drop down 
+            ProductSizeDropDown();
             ProductStatusDropDown();
 
             return View(product);
@@ -185,7 +187,7 @@ namespace Fashionplex.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(long id, [Bind("ProductName,Description,Slug,MetaDescription,MetaKeywords,SKU,Price,SalePrice,OldPrice,ImageUrl,QuantityInStock,IsBestseller,IsFeatured,CategoryId,BrandId,ProductStatus,Id,CreateDate,ModifiedDate,IsDeleted")] Product product)
+        public async Task<IActionResult> Edit(long id, [Bind("ProductName,Size,Description,Slug,MetaDescription,MetaKeywords,SKU,Price,SalePrice,OldPrice,ImageUrl,QuantityInStock,IsBestseller,IsFeatured,CategoryId,BrandId,ProductStatus,Id,CreateDate,ModifiedDate,IsDeleted")] Product product)
         {
             if (id != product.Id)
             {
@@ -266,6 +268,28 @@ namespace Fashionplex.Controllers
         private bool ProductExists(long id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+
+        /// <summary>
+        /// Helper method for product status enum drop down
+        /// </summary>
+        private void ProductSizeDropDown()
+        {
+            var productSize = new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Select",
+                    Value = " "
+                }
+            };
+
+            foreach (Size item in Enum.GetValues(typeof(Size)))
+            {
+                productSize.Add(new SelectListItem { Text = Enum.GetName(typeof(Size), item), Value = item.ToString() });
+            }
+
+            ViewBag.ProductSize = productSize;
         }
 
         /// <summary>

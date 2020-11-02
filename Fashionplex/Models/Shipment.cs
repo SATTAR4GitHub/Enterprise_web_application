@@ -15,5 +15,6 @@ namespace Fashionplex.Models
         public string Country { get; set; }
         public string Province { get; set; }
         public string PostalCode { get; set; }
+     
     }
 }
