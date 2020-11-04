@@ -2,6 +2,7 @@
 using Fashionplex.Models.Shared;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace Fashionplex.Models
         public string MetaDescription { get; set; }
         public string MetaKeywords { get; set; }
         public string SKU { get; set; }
+        public Size Size { get; set; }
         public decimal Price { get; set; }
         public decimal SalePrice { get; set; }
         public decimal OldPrice { get; set; }
