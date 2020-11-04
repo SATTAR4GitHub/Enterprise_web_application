@@ -1,0 +1,136 @@
+﻿@model Fashionplex.Controllers.Pagination<Fashionplex.Models.Order>
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h1>Order Management</h1>
+<p>Note: Click on the column name for order ascending. By default, orders are displayed by descending order-date.</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["OrderNumberSortParm"]">
+                    Order Id
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CustomerNameSortParm"]">
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Customer)
+                    </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OrderTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OrderItemTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShippingCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ShipmentInfo)
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["OrderStatusSortParm"]">
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().OrderStatus)
+                </a>
+            </th>
+            <th>
+                Date Ordered
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ModifiedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                    @Html.DisplayFor(modelItem => item.Customer.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderItemTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShippingCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipmentInfo.Name),
+                    @Html.DisplayFor(modelItem => item.ShipmentInfo.AddressLine1)
+                    @Html.DisplayFor(modelItem => item.ShipmentInfo.AddressLine2),
+                    @Html.DisplayFor(modelItem => item.ShipmentInfo.City)
+                    @Html.DisplayFor(modelItem => item.ShipmentInfo.Country)
+                    @Html.DisplayFor(modelItem => item.ShipmentInfo.PostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<!--Pagination-->
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="mb-5">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @prevDisabled">
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="page-link">Previous</a>
+        </li>
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@i"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="page-link">
+                    @i
+                </a>
+            </li>
+        }
+        <li class="page-item @nextDisabled">
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="page-link">Next</a>
+        </li>
+    </ul>
+</div>

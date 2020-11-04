@@ -271,7 +271,7 @@ namespace Fashionplex.Controllers
         }
 
         /// <summary>
-        /// Helper method for product status enum drop down
+        /// Helper method for product size drop down from enum value
         /// </summary>
         private void ProductSizeDropDown()
         {
@@ -293,7 +293,7 @@ namespace Fashionplex.Controllers
         }
 
         /// <summary>
-        /// Helper method for product status enum drop down
+        /// Helper method for product status drop down from enum value
         /// </summary>
         private void ProductStatusDropDown()
         {
