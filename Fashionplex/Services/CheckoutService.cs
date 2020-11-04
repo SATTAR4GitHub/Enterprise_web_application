@@ -49,7 +49,8 @@ namespace Fashionplex.Services
             _customerRepository.SaveCustomer(customer);
 
             var shipment = new Shipment
-            {
+            { 
+                Name = checkoutViewModel.FirstName + " " + checkoutViewModel.LastName,
                 AddressLine1 = checkoutViewModel.AddressLine1,
                 AddressLine2 = checkoutViewModel.AddressLine2,
                 City = checkoutViewModel.City,
@@ -77,7 +78,7 @@ namespace Fashionplex.Services
                 IEnumerable<CartDetail> cartItems = _cartItemRepository.FindCartItemsByCartId(cart.Id).ToList();
                 var cartTotal = _cartService.GetCartTotal();
                 decimal shippingCharge = 0;
-                var orderTotal = cartTotal + shippingCharge;
+                var orderTotal = cartTotal*1.13m + shippingCharge;
 
                 var order = new Order
                 {
