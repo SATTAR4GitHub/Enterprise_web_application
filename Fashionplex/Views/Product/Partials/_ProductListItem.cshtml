@@ -10,7 +10,9 @@
     <div class="border border-info mb-5">
         <span class="ml-1">@Model.ProductName</span><br>
 
-        <span class="ml-1">$@Model.Price</span>
+        <span class="ml-1">Price: $@Model.Price</span>
+
+        <span class="ml-1">Size: @Model.Size</span>
 
         <form asp-controller="Cart" asp-action="AddItemToCart" method="post">
             <input type="hidden" asp-for="@cartViewModel.ProductId" name="ProductId" value="@Model.Id" />
