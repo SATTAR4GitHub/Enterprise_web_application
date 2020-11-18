@@ -28,7 +28,6 @@ namespace Fashionplex.Controllers
         {
             int pageSize = 5;
 
-
             ViewData["CurrentSort"] = sortOrder;
             ViewData["OrderStatusSortParm"] = String.IsNullOrEmpty(sortOrder) ? "orderStatus_asc" : "";
             ViewData["OrderNumberSortParm"] = String.IsNullOrEmpty(sortOrder) ? "orderNumber_asc" : "";
@@ -76,31 +75,6 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        //// GET: Orders/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
-        //    ViewData["ShipmentId"] = new SelectList(_context.Shipments, "Id", "Id");
-        //    return View();
-        //}
-
-        //// POST: Orders/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("OrderTotal,OrderItemTotal,ShippingCost,CustomerId,ShipmentId,OrderStatus,Id,CreateDate,ModifiedDate,IsDeleted")] Order order)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(order);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
-        //    ViewData["ShipmentId"] = new SelectList(_context.Shipments, "Id", "Id", order.ShipmentId);
-        //    return View(order);
-        //}
 
         // GET: Orders/Edit/5
         [Authorize(Roles = "Admin")]

@@ -19,6 +19,7 @@ namespace Fashionplex.Services
         private ICartRepository _cartRepository;
         private ICartDetailsRepository _cartItemRepository;
         private ICartService _cartService;
+
         public CheckoutService(ICustomerRepository customerRepository,
             IShipmentRepository addressRepository,
             IOrderRepository orderRepository,
@@ -61,15 +62,6 @@ namespace Fashionplex.Services
             };
 
             _shipmentRepository.SaveShipment(shipment);
-
-            //var customer = new Customer
-            //{
-            //    PersonId = person.Id,
-            //    Person = person,
-            //    IsDeleted = false
-            //};
-
-            //_customerRepository.SaveCustomer(customer);
 
             var cart = _cartService.GetCart();
 

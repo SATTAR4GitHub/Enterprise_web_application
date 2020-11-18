@@ -42,7 +42,7 @@
                                 </td>
                                 <td>@item.Product.ProductName <br> Size: @item.Product.Size</td>
                                 <td class="text-center ">$@item.Product.Price</td>
-                                <td class="text-center ">@item.Quantity</td>
+                                <td class="text-center "><input type="number" name="quantities" value="@item.Quantity" min="1" style="width: 50px;" /></td>
                                 <td class="text-center ">$@(item.Quantity * item.Product.Price)</td>
                                 <td class="text-center">
                                     <form asp-controller="Cart" asp-action="RemoveCartItem" method="post">

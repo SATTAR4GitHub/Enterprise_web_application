@@ -61,8 +61,8 @@ namespace Fashionplex.Services
             if (categorySlug != "all-categories" && brandSlug == "all-brands")
             {
                 var filteredProducts = _productRepository.GetAllProducts()
-                                                         .Where(product => product.ProductStatus == ProductStatus.Continued &&
-                                                                           product.Category.Slug == categorySlug);
+                                         .Where(product => product.ProductStatus == ProductStatus.Continued &&
+                                             product.Category.Slug == categorySlug);
                 productCount = filteredProducts.Count();
                 products = filteredProducts.Skip((productPage - 1) * _productPerPage)
                                            .Take(_productPerPage);
@@ -71,8 +71,8 @@ namespace Fashionplex.Services
             if (categorySlug == "all-categories" && brandSlug != "all-brands")
             {
                 var filteredProducts = _productRepository.GetAllProducts()
-                                                         .Where(product => product.ProductStatus == ProductStatus.Continued &&
-                                                                           product.Brand.Slug == brandSlug);
+                                           .Where(product => product.ProductStatus == ProductStatus.Continued &&
+                                                  product.Brand.Slug == brandSlug);
                 productCount = filteredProducts.Count();
                 products = filteredProducts.Skip((productPage - 1) * _productPerPage)
                                            .Take(_productPerPage);
@@ -113,8 +113,8 @@ namespace Fashionplex.Services
                 //Check if the pageFragment is an integer and length > 2. 
                 if (int.TryParse(pageFragment, out _) && pathValues.Length > 2)
                 {
-                        var pageNumber = pageFragment.Last().ToString();
-                        defaultPage = Convert.ToInt32(pageNumber);
+                    var pageNumber = pageFragment.Last().ToString();
+                    defaultPage = Convert.ToInt32(pageNumber);
                 }
             }
             return defaultPage;
