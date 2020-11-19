@@ -68,6 +68,11 @@ namespace Fashionplex.Controllers
         /// <returns></returns>
         public IActionResult Confirmation()
         {
+            // Session variables to use later
+            ViewData["CartTotal"] = _cartService.GetCartTotal();
+            ViewData["CartItemsCount"] = _cartService.CartItemsCount();
+            ViewData["CartItems"] = _cartService.GetCartItems();
+
             return View();
         }
     }

@@ -92,6 +92,8 @@ namespace Fashionplex.Services
 
                 var order = new Order
                 {
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
                     OrderTotal = orderTotal,
                     OrderItemTotal = cartTotal,
                     ShippingCost = shippingCharge,
@@ -112,7 +114,9 @@ namespace Fashionplex.Services
                             OrderId = order.Id,
                             Product = cartItem.Product,
                             ProductId = cartItem.ProductId,
-                            Quantity = cartItem.Quantity
+                            Quantity = cartItem.Quantity,
+                            CreateDate = DateTime.Now,
+                            ModifiedDate = DateTime.Now
                         };
 
                     _orderItemRepository.SaveOrderItem(orderItem);

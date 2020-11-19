@@ -87,6 +87,15 @@ namespace Fashionplex.Controllers
         }
 
         /// <summary>
+        /// Method to display promotional offer of the company. 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Promotion()
+        {
+            return View();
+        }
+
+        /// <summary>
         /// Method for error handing
         /// </summary>
         /// <returns></returns>

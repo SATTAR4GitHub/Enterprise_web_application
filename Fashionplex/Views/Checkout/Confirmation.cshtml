@@ -1,6 +1,17 @@
 ﻿
+
 @{
     ViewData["Title"] = "Confirmation";
+    var salesTaxRate = 0.13m;
+}
+@{
+    var cartTotal = Convert.ToDecimal(ViewData["CartTotal"]);
+    var cartItemsCount = Convert.ToInt32(ViewData["CartItemsCount"]);
+    var deleteFromCartViewModel = new DeleteFromCartViewModel();
+
+    var salesTax = Math.Round(cartTotal * salesTaxRate, 2);
+    var shipping = 0.00m;
+    var estimatedTotal = cartTotal + salesTax + shipping;
 }
 
 <h2 class="border-bottom mb-5">Order Confirmation</h2>
@@ -19,10 +30,56 @@
     </div>
 </div>
 
-<div class="mt-5">
-    <h5>Your Order Status: </h5>
+<div class="mt-5 text-center">
+    <h5>
+        Order Status: <a class="text-primary ml-2">Under Process</a>
+    </h5>
 </div>
 
-<h5 class="border-bottom border-info">Order Details</h5>
+<h4 class="border-bottom border-info">Order Details</h4>
+<div>
+    <p>Order# 0012925412</p>
+    <table class="table table-bordered table-striped">
+        <thead class="">
+            <tr>
+                <th class="text-center ">Product</th>
+                <th class="text-center ">Price</th>
+                <th class="text-center ">Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="">
+                <td class="text-center ">Polo Peak-Lapel Tuxedo Jacket</td>
+                <td class="text-center ">$198.00</td>
+                <td class="text-center ">1</td>
+            </tr>
+
+            <tr class="border-top font-weight-bolder">
+                <td>Estimated Total:</td>
+                <td class="text-right">$223.74</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="">
+    <h5>Shipping Information:</h5>
+    <div class="ml-5">
+        <p>
+            Mike Mullar <br>
+            5 Hamilton ST W <br>
+            Hamilton, ON <br>
+            Canada, S7H1L8<br>
+
+            mike@mail.ca
+        </p>
+    </div>
+    <p class="mt-5">
+        Sincerely,<br>
+
+        Fashionplex Inc.
+    </p>
+</div>
 
 

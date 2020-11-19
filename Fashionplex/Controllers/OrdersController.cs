@@ -207,6 +207,11 @@ namespace Fashionplex.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Check if any order exists
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool OrderExists(long id)
         {
             return _context.Orders.Any(e => e.Id == id);
