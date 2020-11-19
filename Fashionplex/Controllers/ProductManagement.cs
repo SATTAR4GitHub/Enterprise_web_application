@@ -31,7 +31,7 @@ namespace Fashionplex.Controllers
         }
 
         /// <summary>
-        /// GET: ProductManagement
+        /// GET MEtHOD: Didplay all the products created by the admin. Also short and search products.  
         /// </summary>
         /// <param name="sortOrder"></param>
         /// <param name="searchString"></param>
@@ -66,7 +66,6 @@ namespace Fashionplex.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(p => p.ProductName.Contains(searchString));
-                //products = _context.Products.Include(p => p.Brand).Include(p => p.Category);
             }
 
             switch (sortOrder)
@@ -90,6 +89,7 @@ namespace Fashionplex.Controllers
 
         /// <summary>
         /// GET: ProductManagement/Details/5
+        /// Return product details for each product. 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -114,6 +114,7 @@ namespace Fashionplex.Controllers
 
         /// <summary>
         /// GET: ProductManagement/Create
+        /// Method to create new product.
         /// </summary>
         /// <returns></returns>
         [Authorize(Roles = "Admin")]
@@ -122,7 +123,7 @@ namespace Fashionplex.Controllers
             ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "BrandName");
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "CategoryName");
 
-            // Method for product size and status enum drop down 
+            // Call methods for product size and status enum drop down 
             ProductSizeDropDown();
             ProductStatusDropDown();
 
@@ -151,6 +152,7 @@ namespace Fashionplex.Controllers
 
         /// <summary>
         /// GET: ProductManagement/Edit/5
+        /// Method to update a product.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -177,9 +179,10 @@ namespace Fashionplex.Controllers
             return View(product);
         }
 
-      
+
         /// <summary>
         /// POST: ProductManagement/Edit/5
+        /// Method to update product and submit the updated product.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="product"></param>
@@ -221,6 +224,7 @@ namespace Fashionplex.Controllers
 
         /// <summary>
         /// GET: ProductManagement/Delete/5
+        /// Method to delete a product.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

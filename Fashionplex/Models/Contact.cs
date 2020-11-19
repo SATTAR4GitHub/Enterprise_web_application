@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains correspondence data with get and set methods, creates
+    /// contact table via entity framework. 
+    /// </summary>
     public class Contact
     {
         [Key]

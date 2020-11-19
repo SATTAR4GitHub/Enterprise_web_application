@@ -12,17 +12,30 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fashionplex.Controllers
 {
+    /// <summary>
+    /// This class controlls all the incoming orders made by the customers.
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Constructor to initialize DbContext
+        /// </summary>
+        /// <param name="context"></param>
         public OrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Orders
+        /// <summary>
+        /// // GET: Orders
+        /// Display all the orders and sort orders when clicking on the table column header
+        /// </summary>
+        /// <param name="sortOrder"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string sortOrder, int? pageNumber)
         {
@@ -54,7 +67,12 @@ namespace Fashionplex.Controllers
             return View(await Pagination<Order>.CreateAsync(orders.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-        // GET: Orders/Details/5
+        /// <summary>
+        /// GET: Orders/Details/5
+        /// Return order details for each order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(long? id)
         {
@@ -76,7 +94,12 @@ namespace Fashionplex.Controllers
         }
 
 
-        // GET: Orders/Edit/5
+        /// <summary>
+        /// GET: Orders/Edit/5
+        /// Method to update an order.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long? id)
         {
@@ -99,9 +122,13 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        // POST: Orders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Orders/Edit/5
+        /// Method to submit the updated order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -137,7 +164,12 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        // GET: Orders/Delete/5
+        /// <summary>
+        /// GET: Orders/Delete/5
+        /// Method that renders an order when clcik the delete button 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long? id)
         {
@@ -158,7 +190,12 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        // POST: Orders/Delete/5
+        /// <summary>
+        /// POST: Orders/Delete/5
+        /// Complete the delete process of an order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]

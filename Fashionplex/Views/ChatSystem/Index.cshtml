@@ -22,7 +22,6 @@
         {
             <h4 class="text-center text-primary mb-4">
                 <i class="fab fa-facebook-messenger"></i>&nbsp; @user.FirstName @user.LastName
-                <input id="btnConnect" type="button" value="Connect" />
             </h4>
         }
         else
@@ -101,18 +100,6 @@
     <script src="~/lib/jquery/dist/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/js/chat.js"></script>
     <script src="~/js/signalrReqHandler.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#btnConnect').click(function () {
-                $(this).val('Connected');
-                //var name = 'Manager is connected!';
-                //document.getElementById('selector').innerHTML = name;
-                //$("#selector").html(name);
-                //$("p.selector").text($(this).text() == 'Connected' ? 'name' : 'Order by Alphabet');
-            })
-        });
-    </script>
 
 }
 

@@ -11,16 +11,29 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fashionplex.Controllers
 {
+    /// <summary>
+    /// This calss handles customers' correspondence: complaints, comments, problems etc. 
+    /// Controlls authorization and authentications.
+    /// </summary>
     public class ContactsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Initialize DbContext
+        /// </summary>
+        /// <param name="context"></param>
         public ContactsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Contacts
+        /// <summary>
+        /// GET: Contacts
+        /// Display all the communications. Admin deals Complaints page from the Dashboard where only admin 
+        /// has access.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
@@ -158,6 +171,11 @@ namespace Fashionplex.Controllers
             return View(await _context.Contacts.ToListAsync());
         }
 
+        /// <summary>
+        /// Check if any contact data exists or not
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ContactExists(int id)
         {
             return _context.Contacts.Any(e => e.Id == id);

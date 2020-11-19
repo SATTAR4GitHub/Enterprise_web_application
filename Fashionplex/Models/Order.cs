@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains order's information with get and set methods, creates
+    /// order table via entity framework. 
+    /// </summary>
     public class Order : BaseModel
     {
         [Display(Name = "Total Price")]

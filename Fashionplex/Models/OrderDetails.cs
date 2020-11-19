@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains order's details information with get and set methods, creates
+    /// orderDetails table via entity framework. 
+    /// </summary>
     public class OrderDetails : BaseModel
     {
         public long ProductId { get; set; }

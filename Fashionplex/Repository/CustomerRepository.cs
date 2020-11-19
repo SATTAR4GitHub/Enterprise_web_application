@@ -8,10 +8,17 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Repository
 {
+    /// <summary>
+    /// This class contains all the methods to complete CRUD (Create, read, update, delete) operation for the customer tables.
+    /// </summary>
     public class CustomerRepository : ICustomerRepository
     {
         private ApplicationDbContext _context;
 
+        /// <summary>
+        /// Initialize DbContext
+        /// </summary>
+        /// <param name="context"></param>
         public CustomerRepository(ApplicationDbContext context)
         {
             _context = context;

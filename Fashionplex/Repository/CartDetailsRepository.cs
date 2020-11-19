@@ -8,10 +8,17 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Repository
 {
+    /// <summary>
+    /// This class contains all the methods to complete CRUD (Create, read, update, delete) operation for the shopping cart items.
+    /// </summary>
     public class CartDetailsRepository : ICartDetailsRepository
     {
         private ApplicationDbContext _context;
 
+        /// <summary>
+        /// Initialize DbContext
+        /// </summary>
+        /// <param name="context"></param>
         public CartDetailsRepository(ApplicationDbContext context)
         {
             _context = context;

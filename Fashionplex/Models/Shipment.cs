@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains shipment information and updates view after changes
+    /// </summary>
     public class Shipment : BaseModel
     {
         public string Name { get; set; }

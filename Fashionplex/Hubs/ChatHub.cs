@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Hubs
 {
+    /// <summary>
+    /// This class uses method to send chat message and inherits fetures from the base class of the SignalR
+    /// </summary>
     public class ChatHub : Hub
     {
         public async Task SendMessage(Message message) =>

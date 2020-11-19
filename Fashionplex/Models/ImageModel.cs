@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains Image uploading fetures with get and set methods.
+    /// </summary>
     public class ImageModel
     {
-
         public int Id { get; set; }
         [Display(Name = "Image Uploader")]
         [Required]

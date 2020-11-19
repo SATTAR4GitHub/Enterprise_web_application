@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains chat messages information/fetures with get and set methods, creates
+    /// message table via entity framework. 
+    /// </summary>
     public class Message
     {
         public int Id { get; set; }

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models 
 {
+    /// <summary>
+    /// This class contains Brand's fetures with get and set methods, creates
+    /// brand table via entity framework. 
+    /// </summary>
     public class Brand : BaseModel
     {
         public string BrandName { get; set; }

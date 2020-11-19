@@ -14,28 +14,45 @@ using Fashionplex.ViewModels;
 
 namespace Fashionplex.Controllers
 {
+    /// <summary>
+    /// This class handles Home page of the application.
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;
         
-
+        /// <summary>
+        /// Initialize the web hosting environment where the application is running in
+        /// </summary>
+        /// <param name="hostingEnvironment"></param>
         public HomeController(IHostingEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment;
         }
 
+        /// <summary>
+        /// Return the Home page view of the application
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
-        
+        /// <summary>
+        /// GET: AddImage 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult AddImage()
         {
             return View();
         }
 
-        //POST: Adding image for banner and logo
+        /// <summary>
+        /// POST: Adding image for banner and logo
+        /// </summary>
+        /// <param name="imageModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddImage(ImageModel imageModel)
         {
@@ -60,11 +77,19 @@ namespace Fashionplex.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Method to display privacy statement of the company
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Privacy()
         {
             return View();
         }
 
+        /// <summary>
+        /// Method for error handing
+        /// </summary>
+        /// <returns></returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
