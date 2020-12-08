@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Services
 {
+    /// <summary>
+    /// This class contains all the logics and methods to populate shopping cart using product repository, 
+    /// and cart repository.
+    /// </summary>
     public class CartService : ICartService
     {
         private const string UniqueCartIdSessionKey = "UniqueCartId";
@@ -18,6 +22,13 @@ namespace Fashionplex.Services
         private readonly ICartDetailsRepository _cartItemRepository;
         private readonly IProductRepository _productRepository;
 
+        /// <summary>
+        /// Initialize repositories
+        /// </summary>
+        /// <param name="httpContextAccessor"></param>
+        /// <param name="cartRepository"></param>
+        /// <param name="cartItemRepository"></param>
+        /// <param name="productRepository"></param>
         public CartService(IHttpContextAccessor httpContextAccessor,
                             ICartRepository cartRepository,
                             ICartDetailsRepository cartItemRepository,
@@ -29,6 +40,10 @@ namespace Fashionplex.Services
             _productRepository = productRepository;
         }
 
+        /// <summary>
+        /// Generarte a unique cart Guid id
+        /// </summary>
+        /// <returns></returns>
         public string UniqueCartId()
         {
             if (!string.IsNullOrWhiteSpace(_httpContext.Session.GetString(UniqueCartIdSessionKey)))
@@ -44,13 +59,20 @@ namespace Fashionplex.Services
             }
         }
 
+        /// <summary>
+        /// Method to get all carts
+        /// </summary>
+        /// <returns></returns>
         public Cart GetCart()
         {
-            //var uniqueId = UniqueCartId();
             var cart = _cartRepository.GetAllCarts().FirstOrDefault();
             return cart;
         }
 
+        /// <summary>
+        /// Method to add or update products to the shopping cart.
+        /// </summary>
+        /// <param name="cartViewModel"></param>
         public void AddToCart(CartViewModel cartViewModel)
         {
             var cart = GetCart();
@@ -113,12 +135,20 @@ namespace Fashionplex.Services
             }
         }
 
+        /// <summary>
+        /// Remove shopping cart item
+        /// </summary>
+        /// <param name="removeFromCartViewModel"></param>
         public void RemoveFromCart(DeleteFromCartViewModel removeFromCartViewModel)
         {
             var cartItem = _cartItemRepository.FindCartItemById(removeFromCartViewModel.CartItemId);
             _cartItemRepository.DeleteCartItem(cartItem);
         }
 
+        /// <summary>
+        /// Get a list of cart item details
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<CartDetail> GetCartItems()
         {
             IList<CartDetail> cartDetails = new List<CartDetail>();
@@ -133,6 +163,10 @@ namespace Fashionplex.Services
             return cartDetails;
         }
 
+        /// <summary>
+        /// Count total items in the cart
+        /// </summary>
+        /// <returns></returns>
         public int CartItemsCount()
         {
 
@@ -147,7 +181,10 @@ namespace Fashionplex.Services
             return count;
         }
 
-
+        /// <summary>
+        /// Calculate shopping cart total amount
+        /// </summary>
+        /// <returns></returns>
         public decimal GetCartTotal()
         {
             decimal total = 0;

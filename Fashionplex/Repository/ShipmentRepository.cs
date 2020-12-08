@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Repository
 {
+    /// <summary>
+    /// This class contains all the methods to complete CRUD (Create, read, update, delete) operation for the shipment.
+    /// </summary>
     public class ShipmentRepository : IShipmentRepository
     {
         private ApplicationDbContext _context;

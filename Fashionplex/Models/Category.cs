@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains product's category information with get and set methods, creates
+    /// category table via entity framework. 
+    /// </summary>
     public class Category : BaseModel
     {
         public string CategoryName { get; set; }

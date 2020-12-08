@@ -12,22 +12,34 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fashionplex.Controllers
 {
+    /// <summary>
+    /// This class controlls all the incoming orders made by the customers.
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Constructor to initialize DbContext
+        /// </summary>
+        /// <param name="context"></param>
         public OrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Orders
+        /// <summary>
+        /// // GET: Orders
+        /// Display all the orders and sort orders when clicking on the table column header
+        /// </summary>
+        /// <param name="sortOrder"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string sortOrder, int? pageNumber)
         {
             int pageSize = 5;
-
 
             ViewData["CurrentSort"] = sortOrder;
             ViewData["OrderStatusSortParm"] = String.IsNullOrEmpty(sortOrder) ? "orderStatus_asc" : "";
@@ -55,7 +67,12 @@ namespace Fashionplex.Controllers
             return View(await Pagination<Order>.CreateAsync(orders.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-        // GET: Orders/Details/5
+        /// <summary>
+        /// GET: Orders/Details/5
+        /// Return order details for each order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(long? id)
         {
@@ -76,33 +93,13 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        //// GET: Orders/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id");
-        //    ViewData["ShipmentId"] = new SelectList(_context.Shipments, "Id", "Id");
-        //    return View();
-        //}
 
-        //// POST: Orders/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("OrderTotal,OrderItemTotal,ShippingCost,CustomerId,ShipmentId,OrderStatus,Id,CreateDate,ModifiedDate,IsDeleted")] Order order)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(order);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Id", order.CustomerId);
-        //    ViewData["ShipmentId"] = new SelectList(_context.Shipments, "Id", "Id", order.ShipmentId);
-        //    return View(order);
-        //}
-
-        // GET: Orders/Edit/5
+        /// <summary>
+        /// GET: Orders/Edit/5
+        /// Method to update an order.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long? id)
         {
@@ -125,9 +122,13 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        // POST: Orders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Orders/Edit/5
+        /// Method to submit the updated order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -163,7 +164,12 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        // GET: Orders/Delete/5
+        /// <summary>
+        /// GET: Orders/Delete/5
+        /// Method that renders an order when clcik the delete button 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long? id)
         {
@@ -184,7 +190,12 @@ namespace Fashionplex.Controllers
             return View(order);
         }
 
-        // POST: Orders/Delete/5
+        /// <summary>
+        /// POST: Orders/Delete/5
+        /// Complete the delete process of an order
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -196,6 +207,11 @@ namespace Fashionplex.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Check if any order exists
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool OrderExists(long id)
         {
             return _context.Orders.Any(e => e.Id == id);

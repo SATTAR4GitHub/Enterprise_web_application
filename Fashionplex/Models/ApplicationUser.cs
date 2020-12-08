@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains user's information and updates view after changes
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         [PersonalData]

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Services
 {
-   public interface IProductService
+    /// <summary>
+    /// Product interface that forces the Product Service to implement the declared method.
+    /// </summary>
+    public interface IProductService
     {
         ProductViewModel FetchProducts(string categorySlug, string brandSlug);
     }

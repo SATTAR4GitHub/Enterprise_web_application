@@ -10,34 +10,36 @@
 
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
-   <a class="btn btn-outline-info mb-3" asp-area="" asp-controller="ProductManagement" asp-action="Index"><h4>Manage Product</h4></a>
+    <a class="btn btn-outline-info mb-3" asp-area="" asp-controller="ProductManagement" asp-action="Index"><h4>Manage Product</h4></a>
 }
-    <br>
-    <div class="container">
+<br>
 
-        <form method="get">
-            <div class="form-group w-50">
-                <select class="form-control" type="text" data-toggle="modal" data-target="#advancedSearchModal" id="advancedsearch-button">
-                    <option disabled selected>Search product</option>
-                </select>
-            </div>
-        </form>
-        @*<partial name="../_AdvancedSearchPatial" /><br>
-        Html.RenderAction("AdvancedSearch", "Product")*@
-
-        <div class="row">
-            <div class="col-md-3">
-                <h4 class="">Filter By</h4>
-                <hr />
-                <div>
-                    <partial name="../Product/Partials/_Category.cshtml" model="@Model.Categories" view-data="ViewData" />
-                </div>
-                <div>
-                    <partial name="../Product/Partials/_Brand.cshtml" model="@Model.Brands" view-data="ViewData" />
-                </div>
-            </div>
-            <div class="col-md-9 @(Model.PagedProducts.Products.Any()? "index__product-wrapper--has-pages" : "index__product-wrapper--no-pages")" style="padding-top: 40px;">
-                <partial name="../Product/Partials/_ProductList.cshtml" model="@Model" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <form asp-action="Index" method="get">
+                <p>
+                    Search Product by Name: <input class="p-1" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-primary" /> |
+                    <a asp-action="Index">All Products</a>
+                </p>
+            </form>
             </div>
         </div>
-    </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="">Filter Product By</h4>
+                    <hr />
+                    <div>
+                        <partial name="../Product/Partials/_Category.cshtml" model="@Model.Categories" view-data="ViewData" />
+                    </div>
+                    <div>
+                        <partial name="../Product/Partials/_Brand.cshtml" model="@Model.Brands" view-data="ViewData" />
+                    </div>
+                </div>
+                <div class="col-md-9 @(Model.PagedProducts.Products.Any()? "index__product-wrapper--has-pages" : "index__product-wrapper--no-pages")" style="padding-top: 40px;">
+                    <partial name="../Product/Partials/_ProductList.cshtml" model="@Model" />
+                </div>
+            </div>
+        </div>

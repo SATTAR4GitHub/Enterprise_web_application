@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Services
 {
+    /// <summary>
+    /// This class contains all the logics and methods to populate products from database using product repository, 
+    /// category repository, and brand repository.
+    /// </summary>
     public class ProductService : IProductService
     {
         private IBrandRepository _brandRepository;
@@ -18,6 +22,13 @@ namespace Fashionplex.Services
         private readonly HttpContext _httpContext;
         private const int _productPerPage = 9;
 
+        /// <summary>
+        /// Constructor to initialize repositories and http accessor
+        /// </summary>
+        /// <param name="httpContextAccessor"></param>
+        /// <param name="brandRepository"></param>
+        /// <param name="categoryRepository"></param>
+        /// <param name="productRepository"></param>
         public ProductService(IHttpContextAccessor httpContextAccessor,
             IBrandRepository brandRepository,
             ICategoryRepository categoryRepository,
@@ -28,6 +39,13 @@ namespace Fashionplex.Services
             _productRepository = productRepository;
             _httpContext = httpContextAccessor.HttpContext;
         }
+
+        /// <summary>
+        /// This method populates products data and handles product filtering logics, and product page pagination.
+        /// </summary>
+        /// <param name="categorySlug"></param>
+        /// <param name="brandSlug"></param>
+        /// <returns></returns>
         public ProductViewModel FetchProducts(string categorySlug, string brandSlug)
         {
             var brands = _brandRepository.GetAllBrands().Where(brand => brand.IsDeleted == false);
@@ -61,8 +79,8 @@ namespace Fashionplex.Services
             if (categorySlug != "all-categories" && brandSlug == "all-brands")
             {
                 var filteredProducts = _productRepository.GetAllProducts()
-                                                         .Where(product => product.ProductStatus == ProductStatus.Continued &&
-                                                                           product.Category.Slug == categorySlug);
+                                         .Where(product => product.ProductStatus == ProductStatus.Continued &&
+                                             product.Category.Slug == categorySlug);
                 productCount = filteredProducts.Count();
                 products = filteredProducts.Skip((productPage - 1) * _productPerPage)
                                            .Take(_productPerPage);
@@ -71,8 +89,8 @@ namespace Fashionplex.Services
             if (categorySlug == "all-categories" && brandSlug != "all-brands")
             {
                 var filteredProducts = _productRepository.GetAllProducts()
-                                                         .Where(product => product.ProductStatus == ProductStatus.Continued &&
-                                                                           product.Brand.Slug == brandSlug);
+                                           .Where(product => product.ProductStatus == ProductStatus.Continued &&
+                                                  product.Brand.Slug == brandSlug);
                 productCount = filteredProducts.Count();
                 products = filteredProducts.Skip((productPage - 1) * _productPerPage)
                                            .Take(_productPerPage);
@@ -102,6 +120,10 @@ namespace Fashionplex.Services
             return pagedProducts;
         }
 
+        /// <summary>
+        /// Render the current page when handling pagination in the profuct page
+        /// </summary>
+        /// <returns></returns>
         public int GetCurrentPage()
         {
             var defaultPage = 1;
@@ -113,8 +135,8 @@ namespace Fashionplex.Services
                 //Check if the pageFragment is an integer and length > 2. 
                 if (int.TryParse(pageFragment, out _) && pathValues.Length > 2)
                 {
-                        var pageNumber = pageFragment.Last().ToString();
-                        defaultPage = Convert.ToInt32(pageNumber);
+                    var pageNumber = pageFragment.Last().ToString();
+                    defaultPage = Convert.ToInt32(pageNumber);
                 }
             }
             return defaultPage;

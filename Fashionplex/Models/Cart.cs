@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains Cart's fetures with get and set methods, creates
+    /// cart table via entity framework. 
+    /// </summary>
     public class Cart : BaseModel
     {
         public Cart()

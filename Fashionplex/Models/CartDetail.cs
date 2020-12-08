@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains cart item's details information with get and set methods, creates
+    /// cartDetail table via entity framework. 
+    /// </summary>
     public class CartDetail : BaseModel
     {
         public long ProductId { get; set; }

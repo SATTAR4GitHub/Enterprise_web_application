@@ -1,64 +1,117 @@
 ﻿@model CheckoutViewModel
 @{
     ViewData["Title"] = "Checkout";
+    var salesTaxRate = 0.13m;
+}
+@{
+    var cartTotal = Convert.ToDecimal(ViewData["CartTotal"]);
+    var cartItemsCount = Convert.ToInt32(ViewData["CartItemsCount"]);
+    var cartDetails = ViewData["CartDetails"] as IEnumerable<CartDetail>;
+    var deleteFromCartViewModel = new DeleteFromCartViewModel();
+
+    var salesTax = Math.Round(cartTotal * salesTaxRate, 2);
+    var shipping = 0.00m;
+    var estimatedTotal = cartTotal + salesTax + shipping;
 }
 
-<h1>@ViewData["Title"]</h1>
+<h2 class="mb-5">Submit Your Order</h2>
 
 <div class="container">
     <div class="panel">
-        <div class="panel-heading ">
-            <h1 class="panel-title">
-                <span>Submit Your Order</span>
-            </h1>
-        </div>
-        <form asp-controller="Checkout" asp-action="Checkout" method="POST" style="padding-bottom: 0px;">
+        <div class="row">
+            <div class="col-md-7">
+                <form asp-controller="Checkout" asp-action="Checkout" method="POST" style="padding-bottom: 0px;">
 
-            <div class="panel-body">
-                <div class="form-group">
-                    <label class="" asp-for="FirstName">First Name</label>
-                    <input class="form-control" asp-for="FirstName" required />
+                    <div class="panel-body">
+                        <h5 class="mb-4">Personal Information:</h5>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="FirstName">First Name</label>
+                            <input class="form-control col-sm-9" asp-for="FirstName" required />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="LastName">Last Name</label>
+                            <input class="form-control col-sm-9" asp-for="LastName" required />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="EmailAddress">Email Address</label>
+                            <input class="form-control col-sm-9" asp-for="EmailAddress" required />
+                        </div>
+
+                        <h5 class="mb-4">Shipping Address:</h5>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="AddressLine1">Address Line 1</label>
+                            <input class="form-control col-sm-9" asp-for="AddressLine1" required />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="AddressLine2">Address Line 2</label>
+                            <input class="form-control col-sm-9" asp-for="AddressLine2" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="City">City</label>
+                            <input class="form-control col-sm-9" asp-for="City" required />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="Country">Country</label>
+                            <input class="form-control col-sm-9" asp-for="Country" required />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="Province">Province</label>
+                            <input class="form-control col-sm-9" asp-for="Province" required />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3" asp-for="PostalCode">Postal Code</label>
+                            <input class="form-control col-sm-9" asp-for="PostalCode" required />
+                        </div>
+                    </div>
+                    <div class="panel-footer ml-5">
+                        <div class="ml-5">
+                            <a class="btn btn-light ml-5" asp-controller="Cart" asp-action="CartDetail">Cancel </a>
+                            <button class="btn btn-primary" type="submit">Submit Order</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-1">
+            </div>
+
+
+            <div class="col-md-4 border border-dark h-75">
+                <div class="">
+                    <h4 class="">Cart Summary</h4>
+                    <p>Total Items: @cartItemsCount</p>
                 </div>
-                <div class="form-group">
-                    <label class="" asp-for="LastName">Last Name</label>
-                    <input class="form-control " asp-for="LastName" required />
-                </div>
-                <div class="form-group">
-                    <label class="" asp-for="EmailAddress">Email Address</label>
-                    <input class="form-control " asp-for="EmailAddress" required />
-                </div>
-                <div class="form-group">
-                    <label class="" asp-for="AddressLine1">Address Line 1</label>
-                    <input class="form-control " asp-for="AddressLine1" required />
-                </div>
-                <div class="form-group">
-                    <label class="" asp-for="AddressLine2">Address Line 2</label>
-                    <input class="form-control " asp-for="AddressLine2" />
-                </div>
-                <div class="form-group">
-                    <label class="" asp-for="City">City</label>
-                    <input class="form-control " asp-for="City" required />
-                </div>
-                <div class="form-group">
-                    <label class="" asp-for="Country">Country</label>
-                    <input class="form-control " asp-for="Country" required />
-                </div>
-                <div class="form-group">
-                    <label class="" asp-for="Province">Province</label>
-                    <input class="form-control " asp-for="Province" required />
-                </div>
-                <div class="form-group">
-                    <label class="" asp-for="PostalCode">Postal Code</label>
-                    <input class="form-control " asp-for="PostalCode" required />
+                <table class="table table-sm table-borderless">
+                    <tr>
+                        <td>Sub-Total:</td>
+                        <td class="text-right">$@cartTotal</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping:</td>
+                        <td class="text-right">$@shipping</td>
+                    </tr>
+                    <tr>
+                        <td>GST/HST:</td>
+                        <td class="text-right">$@salesTax</td>
+                    </tr>
+
+                    <tr class="border-top font-weight-bolder">
+                        <td>Estimated Total:</td>
+                        <td class="text-right">$@estimatedTotal</td>
+                    </tr>
+                </table>
+                <div class="mt-4">
+                    <p>Accepted methods for payment:</p>
+                    <p>
+                        <img src="/images/payment-method/visa.jpg" class="mr-3" style="height:50px; width:60px;" />
+                        <img src="/images/payment-method/master.jpg" class="mr-3" style="height:50px; width:60px;" />
+                        <img src="/images/payment-method/paypal.jpg" style="height:50px; width:60px;" />
+                    </p>
                 </div>
             </div>
-            <div class="panel-footer">
-                <div class="checkout__flex-container">
-                    <a class="btn btn-light" asp-controller="Cart" asp-action="CartDetail">Cancel </a>
-                    <button class="btn btn-primary" type="submit">Submit Order</button>
-                </div>
-            </div>
-        </form>
+
+        </div>
+
     </div>
 </div>
 

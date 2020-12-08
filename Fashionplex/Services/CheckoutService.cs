@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Services
 {
+    /// <summary>
+    /// This class contains all the logics and methods to complete checkout process using different repositories, 
+    /// and cart service.
+    /// </summary>
     public class CheckoutService : ICheckoutService
     {
         private ICustomerRepository _customerRepository;
@@ -19,6 +23,17 @@ namespace Fashionplex.Services
         private ICartRepository _cartRepository;
         private ICartDetailsRepository _cartItemRepository;
         private ICartService _cartService;
+
+        /// <summary>
+        /// Initialize repositories and cart service
+        /// </summary>
+        /// <param name="customerRepository"></param>
+        /// <param name="addressRepository"></param>
+        /// <param name="orderRepository"></param>
+        /// <param name="orderItemRepository"></param>
+        /// <param name="cartRepository"></param>
+        /// <param name="cartItemRepository"></param>
+        /// <param name="cartService"></param>
         public CheckoutService(ICustomerRepository customerRepository,
             IShipmentRepository addressRepository,
             IOrderRepository orderRepository,
@@ -36,6 +51,10 @@ namespace Fashionplex.Services
             _cartService = cartService;
         }
 
+        /// <summary>
+        /// Important method to handle checkout process. It saves form data to the three different data tables.
+        /// </summary>
+        /// <param name="checkoutViewModel"></param>
         public void ProcessCheckout(CheckoutViewModel checkoutViewModel)
         {
             var customer = new Customer
@@ -62,15 +81,6 @@ namespace Fashionplex.Services
 
             _shipmentRepository.SaveShipment(shipment);
 
-            //var customer = new Customer
-            //{
-            //    PersonId = person.Id,
-            //    Person = person,
-            //    IsDeleted = false
-            //};
-
-            //_customerRepository.SaveCustomer(customer);
-
             var cart = _cartService.GetCart();
 
             if (cart != null)
@@ -82,6 +92,8 @@ namespace Fashionplex.Services
 
                 var order = new Order
                 {
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
                     OrderTotal = orderTotal,
                     OrderItemTotal = cartTotal,
                     ShippingCost = shippingCharge,
@@ -102,7 +114,9 @@ namespace Fashionplex.Services
                             OrderId = order.Id,
                             Product = cartItem.Product,
                             ProductId = cartItem.ProductId,
-                            Quantity = cartItem.Quantity
+                            Quantity = cartItem.Quantity,
+                            CreateDate = DateTime.Now,
+                            ModifiedDate = DateTime.Now
                         };
 
                     _orderItemRepository.SaveOrderItem(orderItem);

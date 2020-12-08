@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models.Shared
 {
+    /// <summary>
+    /// Base model class with some common fetures of the application model classes
+    /// </summary>
     public class BaseModel
     {
         public long Id { get; set; }

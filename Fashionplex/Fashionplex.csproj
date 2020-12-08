@@ -15,6 +15,8 @@
     <Compile Remove="Data\Migrations\20201102043102_prodSizeAndShipmentCustId.Designer.cs" />
     <Compile Remove="Data\Migrations\20201102053403_productSizeEnum.cs" />
     <Compile Remove="Data\Migrations\20201102053403_productSizeEnum.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201108062140_contactSystem.cs" />
+    <Compile Remove="Data\Migrations\20201108062140_contactSystem.Designer.cs" />
   </ItemGroup>
 
 

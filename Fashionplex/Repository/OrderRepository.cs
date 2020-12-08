@@ -8,10 +8,18 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Repository
 {
+
+    /// <summary>
+    /// This class contains all the methods to complete CRUD (Create, read, update, delete) operation for orders.
+    /// </summary>
     public class OrderRepository : IOrderRepository
     {
         private ApplicationDbContext _context;
 
+        /// <summary>
+        /// Initialize DbContext
+        /// </summary>
+        /// <param name="context"></param>
         public OrderRepository(ApplicationDbContext context)
         {
             _context = context;

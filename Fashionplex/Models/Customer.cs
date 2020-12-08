@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Models
 {
+    /// <summary>
+    /// This class contains customer's fetures with get and set methods, creates
+    /// customer table via entity framework. 
+    /// </summary>
     public class Customer : BaseModel
     {
         public string FirstName { get; set; }

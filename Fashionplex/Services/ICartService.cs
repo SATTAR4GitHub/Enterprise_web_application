@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Services
 {
+    /// <summary>
+    /// Cart interface that forces the Cart Service to implement the declared methods.
+    /// </summary>
     public interface ICartService
     {
         string UniqueCartId();

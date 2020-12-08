@@ -9,10 +9,17 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Repository
 {
+    /// <summary>
+    /// This class contains all the methods to complete CRUD (Create, read, update, delete) operation for the product category.
+    /// </summary>
     public class CategoryRepository : ICategoryRepository
     {
         private ApplicationDbContext _dbContext;
 
+        /// <summary>
+        /// Initialize DbContext
+        /// </summary>
+        /// <param name="dbContext"></param>
         public CategoryRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;

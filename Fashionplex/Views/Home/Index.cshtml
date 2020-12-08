@@ -4,49 +4,45 @@
 
 
 
-    <div class="container mt-5 ml-5">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-1"></div>
 
-        <form method="get">
-            <div class="form-group w-75 ml-5">
-                <select class="form-control" type="text" data-toggle="modal" data-target="#advancedSearchModal" id="advancedsearch-button">
-                    <option disabled selected>Search product</option>
-                </select>
+        <div class="col-md-10">
+
+            <div class="container mb-1 text-center border border-info">
+                <h2 class="pt-2 font-weight-bold"><i class="fa fa-bullhorn" aria-hidden="true"></i> Hurrah! Enter Store 30% Off! </h2>
             </div>
-        </form>
-
-        <partial name="_AdvancedSearchPartial" /><br>
-
-        <div class="container ml-5 mb-1 text-center border border-info w-75">
-            <h2 class="pt-2 font-weight-bold"><i class="fa fa-bullhorn" aria-hidden="true"></i> Hurrah! Enter Store 30% Off! </h2>
-        </div>
-        <div class="row container">
-            <div id="carouselControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row ml-0">
-                            <img class="ml-5 w-75" src="~/images/banner-logo/banner1.jpg" alt="First slide" height="400">
+            <div class="">
+                <div id="carouselControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <img class="w-100" src="~/images/banner-logo/banner1.jpg" alt="First slide" height="400">
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row ml-0">
-                            <img class="ml-5 w-75" src="~/images/banner-logo/banner2.jpg" alt="First slide" height="400">
+                        <div class="carousel-item">
+                            <div class="row ">
+                                <img class="w-100" src="~/images/banner-logo/banner2.jpg" alt="First slide" height="400">
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row ml-0">
-                            <img class="ml-5 w-75" src="~/images/banner-logo/banner3.jpg" alt="First slide" height="400">
+                        <div class="carousel-item">
+                            <div class="row ">
+                                <img class="w-100" src="~/images/banner-logo/banner3.jpg" alt="First slide" height="400">
+                            </div>
                         </div>
+                        <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 

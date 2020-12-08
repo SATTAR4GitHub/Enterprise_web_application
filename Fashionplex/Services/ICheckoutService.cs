@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fashionplex.Services
 {
+    /// <summary>
+    /// Checkout interface that forces the Checkout Service to implement the declared method.
+    /// </summary>
     public interface ICheckoutService
     {
         void ProcessCheckout(CheckoutViewModel checkoutViewModel);

@@ -34,5 +34,6 @@ namespace Fashionplex.Data
         public DbSet<CartDetail> CartDetails { get; set; }
         public DbSet<Shipment> Shipments { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
     }
 }
