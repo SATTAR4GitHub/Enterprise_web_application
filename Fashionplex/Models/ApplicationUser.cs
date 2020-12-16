@@ -14,19 +14,21 @@ namespace Fashionplex.Models
     public class ApplicationUser : IdentityUser
     {
         [PersonalData]
-        [MaxLength(50)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z.]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [PersonalData]
-        [MaxLength(50)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z.]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [PersonalData]
-        [MaxLength(60)]
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(80)]
         public string AddressLine1 { get; set; }
         [PersonalData]
-        [MaxLength(60)]
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(80)]
         public string AddressLine2 { get; set; }
         [PersonalData]
-        [MaxLength(30)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z.]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         public string Country { get; set; }
 
         [MinimumAge(18, ErrorMessage = "You must be 18 years old.")]

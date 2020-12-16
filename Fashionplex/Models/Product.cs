@@ -14,10 +14,15 @@ namespace Fashionplex.Models
     /// </summary>
     public class Product : BaseModel
     {
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         public string ProductName { get; set; }
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(150)]
         public string Description { get; set; }
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         public string Slug { get; set; }
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         public string MetaDescription { get; set; }
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         public string MetaKeywords { get; set; }
         public string SKU { get; set; }
         public Size Size { get; set; }
