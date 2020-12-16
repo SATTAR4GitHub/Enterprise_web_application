@@ -16,6 +16,7 @@ namespace Fashionplex.Models
         [Required]
         public string UserName { get; set; }
         [Required]
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         public string Text { get; set; }
         public DateTime When { get; set; }
         public string UserID { get; set; }

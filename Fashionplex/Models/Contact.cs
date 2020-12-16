@@ -17,23 +17,23 @@ namespace Fashionplex.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
         [EmailAddress]
-        [MaxLength(100)]
+        [RegularExpression(@"^[a-z0-9][-a-z0-9._]+@([-a-z0-9]+.)+[a-z]{2,5}$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(60)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(500)]
         public string Description { get; set; }
     }
 }

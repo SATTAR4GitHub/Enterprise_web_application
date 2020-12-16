@@ -43,7 +43,7 @@ namespace Fashionplex.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [RegularExpression(@"^[a-z0-9][-a-z0-9._]+@([-a-z0-9]+.)+[a-z]{2,5}$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(60)]
             public string Email { get; set; }
 
             [Required]
@@ -59,18 +59,23 @@ namespace Fashionplex.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "First Name")]
+            [RegularExpression(@"^[A-Z]+[a-zA-Z.]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
             public string FirstName { get; set; }
 
             [Required]
             [Display(Name = "Last Name")]
+            [RegularExpression(@"^[A-Z]+[a-zA-Z.]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
             public string LastName { get; set; }
 
             [Display(Name = "Address Line1")]
+            [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(80)]
             public string AddressLine1 { get; set; }
 
             [Display(Name = "Address Line2")]
+            [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(80)]
             public string AddressLine2 { get; set; }
 
+            [RegularExpression(@"^[A-Z]+[a-zA-Z.]*$", ErrorMessage = "Your input is not valid, please try again."), MaxLength(50)]
             public string Country { get; set; }
 
             [MinimumAge(18, ErrorMessage = "You must be 18 years old.")]
